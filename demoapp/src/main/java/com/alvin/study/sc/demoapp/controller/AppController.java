@@ -22,6 +22,6 @@ public class AppController {
     @RequestMapping("/test")
     public String test() {
         List<String> serviceNameList = client.getServices();
-        return "hello1," + serviceNameList.size() + "," + serverPort;
+        return "hello," + serviceNameList.size() + "," + serverPort;
     }
 }
