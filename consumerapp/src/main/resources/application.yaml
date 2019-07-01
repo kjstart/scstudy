@@ -1,6 +1,16 @@
 server:
   port: 9000
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+turbine:
+  app-config: 'ribbon-consumer'
+  combine-host-port: true
+
 spring:
   application:
     name: 'ribbon-consumer'

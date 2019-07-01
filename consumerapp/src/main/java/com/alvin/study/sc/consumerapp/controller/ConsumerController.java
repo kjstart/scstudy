@@ -1,21 +1,29 @@
 package com.alvin.study.sc.consumerapp.controller;
 
+import com.alvin.study.sc.consumerapp.service.TestService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/consumer")
 public class ConsumerController {
 
     @Autowired
-    RestTemplate restTemplate;
+    TestService testService;
 
     @RequestMapping(method = RequestMethod.GET, value="/lbtest")
     public String testConsumer(){
-//        return 1/0;
-        return restTemplate.getForEntity("http://demo-app/app/test", String.class).getBody();
+        return testService.hello();
     }
+
+    @RequestMapping(method = RequestMethod.GET, value="/name/{name}")
+    public String testConsumer(@PathVariable String name){
+        return testService.writeName(name);
+    }
+
+
 }
